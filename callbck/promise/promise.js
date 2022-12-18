@@ -135,3 +135,33 @@ p1.then((res) => {
     console.log(e);
   }
 );
+
+Promise.prototype.all = function (arr) {
+  let index = 0;
+  return new Promise((resolve, reject) => {
+    for (let index = 0; index < arr.length; index++) {
+      ++index;
+      Promise.resolve(arr[i]).then(
+        () => {
+          if (index === arr.length) {
+            resolve(arr);
+          }
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    }
+  });
+};
+
+Promise.prototype.race = function (arr) {
+  return new Promise((resolve, reject) => {
+    for (let index = 0; index < arr.length; index++) {
+      Promise.resolve(arr[i]).then(resolve, reject);
+    }
+  });
+};
+
+
+
