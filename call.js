@@ -24,3 +24,24 @@ Function.prototype.call2 = function (context, ...args) {
   delete context[synbolKey];
   return res;
 };
+
+Function.prototype.call3 = function (context) {
+  context = context ? Object(context) : window;
+  context.fn = this;
+  let args = [];
+  for (let i = 1; i < arguments.length; i++) {
+    args.push("arguments[" + i + "]");
+  }
+  let res = eval("context.fn(" + args + ")");
+  delete context.fn;
+  return res;
+};
+
+Function.prototype.call4 = function (context, ...args) {
+  context = context ? Object(context) : window;
+  let synbolKey = new Symbol();
+  context[synbolKey] = this;
+  let res = context[synbolKey](...args);
+  delete context[synbolKey];
+  return res;
+};

@@ -13,3 +13,11 @@ function getName(age, type) {
   console.log(this.name, age, type);
 }
 getName.myApply(obj, [18, "gouzi"]);
+
+Function.prototype.apply = function (context, args) {
+  context = context ? Object(context) : window;
+  let symbolKey = new Symbol();
+  let res = context[symbolKey](...args);
+  delete context[symbolKey];
+  return res;
+};

@@ -19,3 +19,16 @@ function getName(age, type) {
 let a = getName.myBind(obj, 12);
 
 a("gouzi");
+
+Function.prototype.bind = function (context) {
+  let that = this;
+  let argBind = Array.prototype.slice.call(arguments, 1);
+  function fBound() {
+    let Bind = Array.prototype.slice.call(arguments);
+    return that.apply(
+      this instanceof fBound ? this : context,
+      argBind.concat(Bind)
+    );
+  }
+  return fBound;
+};

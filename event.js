@@ -45,3 +45,30 @@ setTimeout(() => {
 setTimeout(() => {
   console.log("/");
 });
+
+function throttle1(fn, delay) {
+  let last = 0;
+  return function () {
+    let context = this;
+    let args = arguments;
+    let now = +new Date();
+    if (now - last >= delay) {
+      fn.appy(context, args);
+      last = now;
+    }
+  };
+}
+
+function debounce(fn, delay) {
+  let timer = null;
+  return function () {
+    let context = this;
+    let args = arguments;
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
