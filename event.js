@@ -72,3 +72,12 @@ function debounce(fn, delay) {
     }, delay);
   };
 }
+
+let a = { name: "ma" };
+let b = Object.create(a);
+b.name = "huang";
+
+console.log(b, a);
+let arr = ["huang", "liu", "zhang", "sun"];
+arr.reverse();
+console.log(arr);
